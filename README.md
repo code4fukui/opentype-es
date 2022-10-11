@@ -32,35 +32,10 @@ API
 ### Loading a font
 ![OpenType.js example Hello World](https://raw.github.com/opentypejs/opentype.js/master/g/hello-world.png)
 
-Use `opentype.load(url, callback)` to load a font from a URL. Since this method goes out the network, it is asynchronous.
-The callback gets `(err, font)` where `font` is a `Font` object. Check if the `err` is null before using the font.
 ```javascript
-opentype.load('fonts/Roboto-Black.ttf', function(err, font) {
-    if (err) {
-        alert('Font could not be loaded: ' + err);
-    } else {
-        // Now let's display it on a canvas with id "canvas"
-        const ctx = document.getElementById('canvas').getContext('2d');
-
-        // Construct a Path object containing the letter shapes of the given text.
-        // The other parameters are x, y and fontSize.
-        // Note that y is the position of the baseline.
-        const path = font.getPath('Hello, World!', 0, 150, 72);
-
-        // If you just want to draw the text you can also use font.draw(ctx, text, x, y, fontSize).
-        path.draw(ctx);
-    }
-});
-```
-
-You can also use `es6 async/await` syntax to load your fonts
-
-```javascript
-async function make() {
-    const font = await opentype.load('fonts/Roboto-Black.ttf');
-    const path = font.getPath('Hello, World!', 0, 150, 72);
-    console.log(path);
-}
+const font = await opentype.load('fonts/Roboto-Black.ttf');
+const path = font.getPath('Hello, World!', 0, 150, 72);
+console.log(path);
 ```
 
 If you already have an `ArrayBuffer`, you can use `opentype.parse(buffer)` to parse the buffer. This method always
