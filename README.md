@@ -1,10 +1,11 @@
 
-# opentype.js &middot; [![Build Status](https://travis-ci.org/opentypejs/opentype.js.svg?branch=master)](https://travis-ci.org/opentypejs/opentype.js) [![npm](https://img.shields.io/npm/v/opentype.js.svg?style=flat-square)](https://www.npmjs.com/package/opentype.js) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/opentypejs/opentype.js/blob/master/LICENSE)
+# opentype-es &middot; [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/opentypejs/opentype.js/blob/master/LICENSE)
 
-opentype.js is a JavaScript ES module parser and writer for TrueType and OpenType fonts.
+opentype-es is a JavaScript ES module parser and writer for TrueType and OpenType fonts, forked [opentype.js](https://github.com/opentypejs/opentype.js).
 
 It gives you access to the <strong>letterforms</strong> of text from the browser or Deno.
-See [https://opentype.js.org/](https://opentype.js.org/) for a live demo.
+
+See a [live demo](https://code4fukui.github.io/opentype-es/)
 
 Features
 ========
@@ -18,11 +19,6 @@ Features
 * Support arabic text rendering (See issue #364 & PR #359 #361)
 * A low memory mode is available as an option (see #329)
 * Runs in the browser and Deno.
-
-Demo
-============
-
-* [DEMO](https://code4fukui.github.io/opentype-es/)
 
 Usage
 ============
