@@ -1,5 +1,24 @@
-import assert from 'assert';
-import { Font, Glyph, Path, loadSync } from '../src/opentype';
+import * as t from "https://deno.land/std/testing/asserts.ts";
+import { Font, Glyph, Path, loadSync } from '../src/opentype.js';
+
+const assert = {
+    equal: (a, b) => t.assertEquals(a, b),
+    deepEqual: (a, b) => t.assertEquals(a, b),
+};
+const describe = (title, func) => {
+    //Deno.test(title, func);
+    func();
+};
+let funcBeforeEach = null;
+const beforeEach = (func) => {
+    funcBeforeEach = func;
+};
+const it = (title, func) => {
+    if (funcBeforeEach) {
+        funcBeforeEach();
+    }
+    Deno.test(title, func);
+};
 
 describe('font.js', function() {
     let font;

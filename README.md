@@ -1,9 +1,9 @@
 
 # opentype.js &middot; [![Build Status](https://travis-ci.org/opentypejs/opentype.js.svg?branch=master)](https://travis-ci.org/opentypejs/opentype.js) [![npm](https://img.shields.io/npm/v/opentype.js.svg?style=flat-square)](https://www.npmjs.com/package/opentype.js) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square)](https://github.com/opentypejs/opentype.js/blob/master/LICENSE)
 
-opentype.js is a JavaScript parser and writer for TrueType and OpenType fonts.
+opentype.js is a JavaScript ES module parser and writer for TrueType and OpenType fonts.
 
-It gives you access to the <strong>letterforms</strong> of text from the browser or Node.js.
+It gives you access to the <strong>letterforms</strong> of text from the browser or Deno.
 See [https://opentype.js.org/](https://opentype.js.org/) for a live demo.
 
 Features
@@ -17,48 +17,19 @@ Features
 * Support for TrueType font hinting.
 * Support arabic text rendering (See issue #364 & PR #359 #361)
 * A low memory mode is available as an option (see #329)
-* Runs in the browser and Node.js.
+* Runs in the browser and Deno.
 
-Installation
+Demo
 ============
 
-### Using [npm](http://npmjs.org/) package manager
+* [DEMO](https://code4fukui.github.io/opentype-es/)
 
-    npm install opentype.js
+Usage
+============
     
-```js
-const opentype = require('opentype.js');
-
-import opentype from 'opentype.js'
-
-import { load } from 'opentype.js'
+```javascript
+import * as opentype from "https://code4fukui.github.io/opentype-es/opentype.js";
 ```
-
-Using TypeScript? [See this example](examples/typescript)
-
-Note: OpenType.js uses ES6-style imports, so if you want to edit it and debug it in Node.js run `npm run build` first and use `npm run watch` to automatically rebuild when files change.
-
-### Directly
-
-[Download the latest ZIP](https://github.com/opentypejs/opentype.js/archive/master.zip) and grab the files in the `dist`
-folder. These are compiled.
-
-### Using via a CDN
-
-To use via a CDN, include the following code in your html:
-
-    <script src="https://cdn.jsdelivr.net/npm/opentype.js@latest/dist/opentype.min.js"></script>
-
-### Using Bower (Deprecated [see official post](https://bower.io/blog/2017/how-to-migrate-away-from-bower/))
-
-To install using [Bower](https://bower.io/), enter the following command in your project directory:
-
-    bower install opentype.js
-
-You can then include them in your scripts using:
-
-    <script src="/bower_components/opentype.js/dist/opentype.js"></script>
-
 
 API
 ===
@@ -89,7 +60,7 @@ opentype.load('fonts/Roboto-Black.ttf', function(err, font) {
 You can also use `es6 async/await` syntax to load your fonts
 
 ```javascript
-async function make(){
+async function make() {
     const font = await opentype.load('fonts/Roboto-Black.ttf');
     const path = font.getPath('Hello, World!', 0, 150, 72);
     console.log(path);
@@ -102,9 +73,9 @@ if they have encoding tables we can't read).
 
     const font = opentype.parse(myBuffer);
 
-### Loading a font synchronously (Node.js)
+### Loading a font synchronously (Deno)
 Use `opentype.loadSync(url)` to load a font from a file and return a `Font` object.
-Throws an error if the font could not be parsed. This only works in Node.js.
+Throws an error if the font could not be parsed. This only works in Deno.
 
     const font = opentype.loadSync('fonts/Roboto-Black.ttf');
 

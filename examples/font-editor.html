@@ -177,8 +177,9 @@
     </div>
 
     <textarea id="code" onclick="select()"></textarea>
-    <script src="../dist/opentype.min.js"></script>
-    <script>
+    <script type=module>
+        import * as opentype from "../src/opentype.js";
+
         function linePoint(t, x1, y1, x2, y2) {
             return [x1 + t * (x2 - x1),
               y1 + t * (y2 - y1)];

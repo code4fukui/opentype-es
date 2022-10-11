@@ -34,14 +34,14 @@
     <span class="info" id="font-name">Fira Sans</span>
     <canvas id="preview" width="940" height="300" class="text"></canvas>
     <div id="message"></div>
-    <input type="text" class="text-input" onkeyup="renderText()" value="Hello, World!"
+    <input type="text" class="text-input" value="Hello, World!"
            autofocus id="textField">
     <label>Font Size<input type="range" min="6" max="500" step="2" value="150" id="font-size-range" autocomplete="off"><span id="fontSize">150</span></label>
-    <label><input type="checkbox" onchange="drawPointsChanged(this)" checked="checked">Draw Points</label>
-    <label><input type="checkbox" onchange="drawMetricsChanged(this)">Draw Metrics</label>
-    <label><input type="checkbox" onchange="kerningChanged(this)" checked="checked">Kerning</label>
-    <label><input type="checkbox" onchange="ligaturesChanged(this)" checked="checked">Ligatures</label>
-    <label id="hinting-label" class="disabled"><input id="hinting-checkbox" type="checkbox" onchange="hintingChanged(this)" disabled="true">Hinting</label>
+    <label><input type="checkbox" id=chk1 checked="checked">Draw Points</label>
+    <label><input type="checkbox" id=chk2 checked="checked">Draw Metrics</label>
+    <label><input type="checkbox" id=chk3 checked="checked">Kerning</label>
+    <label><input type="checkbox" id=chk4 checked="checked">Ligatures</label>
+    <label id="hinting-label" class="disabled"><input id="hinting-checkbox" type="checkbox" disabled="true">Hinting</label>
 
     <hr>
 
@@ -50,10 +50,10 @@
     </div>
 
     <canvas id="snap" width="940" height="300" class="text"></canvas>
-    <label>Strength <input type="range" min="0" max="100" value="80" oninput="snapStrengthChanged(this)"/><span id="snapStrength">80</span></label>
-    <label>Distance<input type="range" min="1" max="100" value="53" oninput="snapDistanceChanged(this)"/><span id="snapDistance">53</span></label>
-    <label>X<input type="range" min="-100" max="100" value="0" oninput="snapXChanged(this)"/><span id="snapX">0</span></label>
-    <label>Y<input type="range" min="-100" max="100" value="0" oninput="snapYChanged(this)"/><span id="snapY">0</span></label>
+    <label>Strength <input type="range" min="0" max="100" value="80" id=range1><span id="snapStrength">80</span></label>
+    <label>Distance<input type="range" min="1" max="100" value="53" id=range2><span id="snapDistance">53</span></label>
+    <label>X<input type="range" min="-100" max="100" value="0" id=range3><span id="snapX">0</span></label>
+    <label>Y<input type="range" min="-100" max="100" value="0" id=range4><span id="snapY">0</span></label>
 
     <hr>
 
@@ -78,7 +78,9 @@
 </div>
 
 
-<script type="text/javascript">
+<script type="module">
+import * as opentype from "./src/opentype.js";
+
 var font = null;
 var fontSize = 150;
 var textToRender = "Hello, World!";
@@ -246,21 +248,21 @@ function showErrorMessage(message) {
     el.innerHTML = message;
 }
 
-function onFontLoaded(font) {
+function onFontLoaded(pfont) {
     var glyphsDiv, i, x, y, fontSize;
-    window.font = font;
+    font = pfont;
 
     // Show the first 100 glyphs.
     glyphsDiv = document.getElementById('glyphs');
     glyphsDiv.innerHTML = '';
 
-    amount = Math.min(100, font.glyphs.length);
+    const amount = Math.min(100, font.glyphs.length);
     x = 50;
     y = 120;
     fontSize = 72;
     for (i = 0; i < amount; i++) {
-        glyph = font.glyphs.get(i);
-        ctx = createGlyphCanvas(glyph, 150);
+        const glyph = font.glyphs.get(i);
+        const ctx = createGlyphCanvas(glyph, 150);
         glyph.draw(ctx, x, y, fontSize);
         glyph.drawPoints(ctx, x, y, fontSize);
         glyph.drawMetrics(ctx, x, y, fontSize);
@@ -321,6 +323,20 @@ opentype.load(fontFileName, function(err, font) {
     }
     onFontLoaded(font);
 });
+
+textField.onkeyup = () => renderText();
+chk1.onchange = () => drawPointsChanged(chk1);
+chk2.onchange = () => drawMetricsChanged(chk2);
+chk3.onchange = () => kerningChanged(chk3);
+chk4.onchange = () => ligaturesChanged(chk4);
+const chk5 = document.getElementById("hinting-checkbox");
+chk5.onchange = () => hintingChanged(chk5);
+
+range1.oninput = () => snapStrengthChanged(range1);
+range2.oninput = () => snapDistanceChanged(range2);
+range3.oninput = () => snapXChanged(range3);
+range4.oninput = () => snapYChanged(range4);
+
 </script>
 </body>
 </html>

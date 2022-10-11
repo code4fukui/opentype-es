@@ -5,7 +5,6 @@
     <meta name="description" content="A JavaScript library to manipulate the letterforms of text from the browser or node.js.">
     <meta charset="utf-8">
     <link rel="stylesheet" href="site.css">
-    <script src="dist/opentype.js"></script>
 </head>
 <body>
 <div class="header">
@@ -61,7 +60,9 @@
 </div>
 
 
-<script>
+<script type=module>
+import * as opentype from "./src/opentype.js";
+
 var cellCount = 100,
     cellWidth = 44,
     cellHeight = 40,
@@ -322,7 +323,7 @@ function initGlyphDisplay() {
     glyphBaseline = glyphMargin + glyphH * head.yMax / maxHeight;
 
     function hline(text, yunits) {
-        ypx = glyphBaseline - yunits * glyphScale;
+        const ypx = glyphBaseline - yunits * glyphScale;
         ctx.fillText(text, 2, ypx+3);
         ctx.fillRect(80, ypx, w, 1);
     }
@@ -338,8 +339,8 @@ function initGlyphDisplay() {
     hline('Typo Descender', font.tables.os2.sTypoDescender);
 }
 
-function onFontLoaded(font) {
-    window.font = font;
+function onFontLoaded(pfont) {
+    font = pfont;
 
     var w = cellWidth - cellMarginLeftRight * 2,
         h = cellHeight - cellMarginTop - cellMarginBottom,

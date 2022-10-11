@@ -1,9 +1,9 @@
 function isBrowser() {
-    return typeof window !== 'undefined';
+    return typeof document !== 'undefined';
 }
 
 function isNode() {
-    return typeof window === 'undefined';
+    return typeof document === 'undefined';
 }
 
 function nodeBufferToArrayBuffer(buffer) {
@@ -17,7 +17,8 @@ function nodeBufferToArrayBuffer(buffer) {
 }
 
 function arrayBufferToNodeBuffer(ab) {
-    const buffer = Buffer.alloc(ab.byteLength);
+    //const buffer = Buffer.alloc(ab.byteLength);
+    const buffer = new Uint8Array(ab.byteLength);
     const view = new Uint8Array(ab);
     for (let i = 0; i < buffer.length; ++i) {
         buffer[i] = view[i];

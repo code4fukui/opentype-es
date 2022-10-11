@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>OpenType writing</title>
-    <script type="text/javascript" src="../dist/opentype.js"></script>
     <style>
         body {
             font: 13px Helvetica, arial, freesans, sans-serif;
@@ -36,12 +35,13 @@
 <div class="container">
     <h1 id="fontFamilyName"></h1>
     <p>This font is generated dynamically in the browser.</p>
-    <button onclick="inFont.download()">Download Font</button>
+    <button id=btn>Download Font</button>
 
     <div id="glyphs"></div>
 </div>
 
-<script>
+<script type=module>
+    import * as opentype from "../src/opentype.js";
 
     var inFont, outFont;
 
@@ -80,6 +80,8 @@
             glyph.drawMetrics(ctx, x, y, fontSize);
         }
     });
+
+    btn.onclick = () => inFont.download();
 
 
 </script>
